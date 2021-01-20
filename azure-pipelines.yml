@@ -1,0 +1,43 @@
+
+trigger:
+  branches:
+    include:
+    - master
+
+
+pool:
+  name: Hosted Windows 2019 with VS2019
+
+stages:
+- stage: UiPath
+  displayName: UiPath Testing
+  dependsOn:
+    - DotNet_Test
+    - Veracode
+  jobs:
+  - job: UiPath
+    steps:
+    - checkout: self
+    - task: UiPathPack@2
+      inputs:
+        versionType: 'AutoVersion'
+        projectJsonPath: 'project.json'
+        outputType: 'Tests'
+        orchestratorConnection: 'HydUiPath'
+        outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+
+    # - task: UiPathTest@2
+    #   inputs:
+    #     testTarget: 'TestProject'
+    #     orchestratorConnection: 'HydUiPath'
+    #     testProjectPath: '$(Build.SourcesDirectory)'
+    #     environment: 'env01'
+    #     folderName: 'Default'
+    #   continueOnError: true
+      
+    # - task: UiPathDeploy@2
+    #   inputs:
+    #     orchestratorConnection: 'HydUiPath'
+    #     packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
+    #     folderName: 'Default'
+    #     environments: 'env01'
