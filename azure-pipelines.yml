@@ -9,22 +9,19 @@ pool:
   name: Hosted Windows 2019 with VS2019
 
 stages:
-- stage: UiPath
-  displayName: UiPath Testing
-  dependsOn:
-    - DotNet_Test
-    - Veracode
-  jobs:
-  - job: UiPath
-    steps:
-    - checkout: self
-    - task: UiPathPack@2
-      inputs:
-        versionType: 'AutoVersion'
-        projectJsonPath: 'project.json'
-        outputType: 'Tests'
-        orchestratorConnection: 'HydUiPath'
-        outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+  - stage: UiPath
+    displayName: UiPath Testing
+    jobs:
+    - job: UiPath
+      steps:
+      - checkout: self
+      - task: UiPathPack@2
+        inputs:
+          versionType: 'AutoVersion'
+          projectJsonPath: 'project.json'
+          outputType: 'Tests'
+          orchestratorConnection: 'HydUiPath'
+          outputPath: '$(Build.ArtifactStagingDirectory)\Output'
 
     # - task: UiPathTest@2
     #   inputs:
