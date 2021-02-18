@@ -15,13 +15,13 @@ stages:
     - job: UiPath
       steps:
       - checkout: self
-      - task: UiPathPack@2
-        inputs:
-          versionType: 'AutoVersion'
-          projectJsonPath: 'project.json'
-          outputType: 'Tests'
-          orchestratorConnection: 'HydUiPath'
-          outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+      # - task: UiPathPack@2
+      #   inputs:
+      #     versionType: 'AutoVersion'
+      #     projectJsonPath: 'project.json'
+      #     outputType: 'Tests'
+      #     orchestratorConnection: 'HydUiPath'
+      #     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
 
     # - task: UiPathTest@2
     #   inputs:
