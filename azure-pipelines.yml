@@ -15,6 +15,7 @@ stages:
     - job: UiPath
       steps:
       - checkout: self
+      - script : echo Anshuman
       # - task: UiPathPack@2
       #   inputs:
       #     versionType: 'AutoVersion'
